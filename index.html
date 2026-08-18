@@ -1,8 +1,8 @@
-y<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Arslan General Store</title>
 
 <style>
@@ -12,55 +12,75 @@ button,input,textarea,select{font:inherit}
 button{cursor:pointer;border:0}
 
 header{
-background:#2874f0;color:white;position:sticky;top:0;z-index:50
+background:#2874f0;color:white;
+position:sticky;top:0;z-index:100
 }
+
 .nav{
-max-width:1200px;margin:auto;padding:10px 14px;
+max-width:1250px;margin:auto;padding:10px 14px;
 display:flex;align-items:center;gap:14px
 }
-.logo{font-size:21px;font-weight:bold;white-space:nowrap}
+
+.logo{font-size:21px;font-weight:900;white-space:nowrap}
 .logo small{display:block;font-size:9px;color:#ffe500}
 
 .search{
-flex:1;background:white;display:flex;border-radius:3px;overflow:hidden
+flex:1;background:white;border-radius:4px;
+display:flex;overflow:hidden
 }
+
 .search input{
 width:100%;padding:12px;border:0;outline:0
 }
-.search button{background:white;color:#2874f0;padding:0 15px}
 
-.cart-btn{
+.search button{
+background:white;color:#2874f0;padding:0 16px
+}
+
+.cartBtn{
 background:none;color:white;font-weight:bold
 }
 
 .hero{
-max-width:1200px;margin:12px auto;padding:35px 25px;
-background:linear-gradient(120deg,#172337,#2874f0);
-color:white;border-radius:6px;
-display:flex;justify-content:space-between;align-items:center
-}
-.hero h1{font-size:38px;margin:0 0 10px}
-.hero p{line-height:1.5}
-.hero button{
-background:#ff9f00;padding:12px 22px;
-font-weight:bold;border-radius:4px
+max-width:1250px;margin:12px auto;
+padding:38px 25px;
+background:linear-gradient(120deg,#101b2d,#2874f0);
+border-radius:8px;color:white;
+display:flex;justify-content:space-between;
+align-items:center
 }
 
-.container{max-width:1200px;margin:auto;padding:0 10px}
+.hero h1{font-size:40px;margin:0 0 10px}
+.hero p{font-size:17px;line-height:1.5}
+.hero button{
+background:#ff9f00;padding:13px 24px;
+border-radius:4px;font-weight:bold
+}
+
+.container{max-width:1250px;margin:auto;padding:0 10px}
 
 .categories{
-display:flex;gap:8px;overflow:auto;background:white;
-padding:12px;margin-bottom:12px
+background:white;padding:13px;
+display:flex;gap:8px;overflow:auto;
+margin-bottom:12px
 }
+
 .category{
-padding:10px 16px;background:#f5f7fa;
-border-radius:20px;white-space:nowrap
+padding:10px 17px;
+background:#f5f7fa;
+border-radius:20px;
+white-space:nowrap
 }
-.category.active{background:#2874f0;color:white}
+
+.category.active{
+background:#2874f0;color:white
+}
 
 .section{
-background:white;padding:18px;margin-bottom:14px
+background:white;margin-bottom:14px;
+padding:18px
 }
+
 .section h2{margin:0 0 16px}
 
 .grid{
@@ -70,96 +90,197 @@ gap:14px
 }
 
 .product{
-border:1px solid #ddd;padding:10px;
-position:relative;background:white
-}
-.product:hover{box-shadow:0 4px 15px #0002}
-
-.product-img{
-height:180px;background:#f7f7f7;
-display:flex;align-items:center;justify-content:center
-}
-.product-img img{
-width:100%;height:100%;object-fit:contain
+border:1px solid #e0e4e9;
+padding:10px;
+position:relative;
+background:white
 }
 
-.product h3{font-size:15px}
-.price{font-size:19px;font-weight:bold}
+.product:hover{
+box-shadow:0 5px 20px #0002
+}
+
+.productImg{
+height:190px;
+background:#f7f7f7;
+display:flex;
+align-items:center;
+justify-content:center
+}
+
+.productImg img{
+width:100%;height:100%;
+object-fit:contain
+}
+
+.product h3{font-size:15px;margin:10px 0}
+.price{font-size:20px;font-weight:bold}
 .mrp{
 text-decoration:line-through;
-color:#777;font-size:12px;margin-left:5px
+font-size:12px;color:#777;margin-left:5px
 }
-.discount{color:#168b3b;font-size:12px;font-weight:bold}
+
+.discount{
+color:#168b3b;font-size:12px;
+font-weight:bold;margin-top:4px
+}
 
 .badge{
 position:absolute;top:8px;left:8px;
 background:#e53935;color:white;
-padding:4px 7px;font-size:10px
+padding:4px 7px;font-size:10px;
+border-radius:3px
 }
 
 .actions{
 display:flex;gap:7px;margin-top:10px
 }
+
 .actions button{
-flex:1;padding:9px;font-weight:bold;border-radius:4px
+flex:1;padding:10px;
+font-weight:bold;border-radius:4px
 }
+
 .add{background:#fb641b;color:white}
 .buy{background:#ff9f00}
 
 .muted{color:#667085;font-size:13px}
 
 .modal{
-display:none;position:fixed;inset:0;
-background:#0008;z-index:100;
-align-items:center;justify-content:center;
+display:none;
+position:fixed;inset:0;
+background:#0009;
+z-index:500;
+align-items:center;
+justify-content:center;
 padding:12px
 }
 
 .box{
-background:white;width:100%;max-width:650px;
-max-height:92vh;overflow:auto;
-padding:20px;border-radius:8px
+background:white;
+width:100%;max-width:680px;
+max-height:94vh;
+overflow:auto;
+padding:20px;
+border-radius:10px
 }
 
-.close{float:right;padding:7px 10px}
+.close{
+float:right;
+background:#eee;
+padding:7px 11px;
+border-radius:4px
+}
+
 .field{
-width:100%;padding:11px;margin:6px 0;
-border:1px solid #ccd4df;border-radius:4px
+width:100%;
+padding:12px;
+margin:6px 0;
+border:1px solid #ccd4df;
+border-radius:5px;
+outline:none
 }
 
 .primary{
-background:#2874f0;color:white;
-padding:11px 18px;border-radius:4px;
+background:#2874f0;
+color:white;
+padding:12px 18px;
+border-radius:5px;
 font-weight:bold
 }
 
-.danger{
-background:#d93025;color:white;
-padding:8px;border-radius:4px
+.orange{
+background:#ff9f00;
+color:#111;
+padding:12px 18px;
+border-radius:5px;
+font-weight:bold
 }
 
-.cart-item{
-display:flex;gap:12px;
-padding:12px 0;border-bottom:1px solid #ddd
-}
-.cart-item img{
-width:70px;height:70px;object-fit:contain
+.red{
+background:#d93025;
+color:white;
+padding:8px;
+border-radius:4px
 }
 
+.green{
+color:#168b3b;
+font-weight:bold
+}
+
+/* BILL */
+.bill{
+border:1px solid #ddd;
+border-radius:6px;
+padding:15px;
+margin-top:15px
+}
+
+.billRow{
+display:flex;
+justify-content:space-between;
+padding:7px 0
+}
+
+.billTotal{
+border-top:1px solid #ddd;
+margin-top:8px;
+padding-top:12px;
+font-size:20px;
+font-weight:bold
+}
+
+/* CART */
+.cartItem{
+display:flex;
+gap:12px;
+padding:13px 0;
+border-bottom:1px solid #ddd
+}
+
+.cartItem img{
+width:75px;height:75px;
+object-fit:contain
+}
+
+.qty button{
+padding:4px 10px;
+border:1px solid #ccc;
+background:white
+}
+
+/* ORDER */
 .order{
 border:1px solid #ddd;
-padding:12px;margin:10px 0;
-border-radius:5px
+padding:14px;
+margin:10px 0;
+border-radius:6px
 }
-.status{color:#2874f0;font-weight:bold}
+
+.status{
+color:#2874f0;
+font-weight:bold
+}
 
 .review{
-padding:12px 0;border-bottom:1px solid #ddd
+padding:13px 0;
+border-bottom:1px solid #ddd
+}
+
+.review img{
+width:100px;height:80px;
+object-fit:cover;
+margin-top:7px;
+border-radius:5px
 }
 
 footer{
-background:#172337;color:white;
-text-align:center;padding:30px;margin-top:20px
+background:#172337;
+color:white;
+text-align:center;
+padding:30px;
+margin-top:20px
 }
 
 @media(max-width:850px){
@@ -170,11 +291,11 @@ text-align:center;padding:30px;margin-top:20px
 .nav{flex-wrap:wrap}
 .search{order:3;flex-basis:100%}
 .grid{grid-template-columns:repeat(2,1fr)}
-.product-img{height:145px}
+.productImg{height:150px}
 .hero h1{font-size:28px}
 .hero{margin:8px}
+.hero>div:last-child{display:none}
 }
-
 </style>
 </head>
 
@@ -195,7 +316,7 @@ oninput="renderProducts()">
 <button>🔍</button>
 </div>
 
-<button class="cart-btn" onclick="openCart()">
+<button class="cartBtn" onclick="openCart()">
 🛒 Cart (<span id="cartCount">0</span>)
 </button>
 
@@ -209,9 +330,9 @@ oninput="renderProducts()">
 
 <div>
 <h1>Arslan General Store</h1>
+
 <p>
-Daily groceries, household products,
-snacks and essential items.
+Grocery • Snacks • Household • Daily Essentials
 </p>
 
 <button onclick="document.getElementById('products').scrollIntoView()">
@@ -229,7 +350,7 @@ SHOP NOW
 
 <section class="section">
 
-<h2>🔥 Best Offers</h2>
+<h2>🔥 Today's Offers</h2>
 
 <div class="grid" id="offers"></div>
 
@@ -263,9 +384,11 @@ Write Review
 
 <footer>
 
-<b>Arslan General Store</b>
+<h3>Arslan General Store</h3>
 
 <p>💵 Cash on Delivery Available</p>
+
+<p>Fast • Simple • Reliable</p>
 
 <button class="primary"
 onclick="openAdmin()">
@@ -288,11 +411,30 @@ onclick="closeModal('cartModal')">✕</button>
 
 <div id="cartItems"></div>
 
-<h3 id="cartTotal"></h3>
+<div class="bill">
 
-<button class="primary"
+<div class="billRow">
+<span>Subtotal</span>
+<b id="subtotal">₹0</b>
+</div>
+
+<div class="billRow">
+<span>Delivery</span>
+<b>FREE</b>
+</div>
+
+<div class="billTotal">
+<span>Total</span>
+<span id="cartTotal">₹0</span>
+</div>
+
+</div>
+
+<br>
+
+<button class="orange"
 onclick="checkout()">
-Continue with Cash on Delivery
+Continue to Checkout
 </button>
 
 </div>
@@ -308,7 +450,7 @@ Continue with Cash on Delivery
 <button class="close"
 onclick="closeModal('checkoutModal')">✕</button>
 
-<h2>📦 Cash on Delivery</h2>
+<h2>📦 Checkout</h2>
 
 <input class="field"
 id="customerName"
@@ -323,11 +465,31 @@ id="customerAddress"
 placeholder="Complete Delivery Address">
 </textarea>
 
-<p><b>Payment Method: Cash on Delivery</b></p>
+<h3>💵 Payment Method</h3>
+
+<div style="
+padding:13px;
+background:#f0fff4;
+border:1px solid #b7e4c7;
+border-radius:5px">
+
+<b>✓ Cash on Delivery</b>
+
+</div>
+
+<div class="bill">
+
+<div id="checkoutBill"></div>
+
+</div>
+
+<br>
 
 <button class="primary"
 onclick="placeOrder()">
-Place COD Order
+
+PLACE COD ORDER
+
 </button>
 
 <p id="orderMessage"></p>
@@ -351,13 +513,14 @@ onclick="closeModal('reviewModal')">✕</button>
 id="reviewName"
 placeholder="Your Name">
 
-<select class="field" id="reviewRating">
+<select class="field"
+id="reviewRating">
 
-<option value="5">★★★★★ 5</option>
-<option value="4">★★★★ 4</option>
-<option value="3">★★★ 3</option>
-<option value="2">★★ 2</option>
-<option value="1">★ 1</option>
+<option value="5">★★★★★ 5 Stars</option>
+<option value="4">★★★★ 4 Stars</option>
+<option value="3">★★★ 3 Stars</option>
+<option value="2">★★ 2 Stars</option>
+<option value="1">★ 1 Star</option>
 
 </select>
 
@@ -373,7 +536,9 @@ accept="image/*">
 
 <button class="primary"
 onclick="submitReview()">
+
 Submit Review
+
 </button>
 
 </div>
@@ -405,7 +570,9 @@ placeholder="Password">
 
 <button class="primary"
 onclick="loginAdmin()">
-Login
+
+LOGIN
+
 </button>
 
 </div>
@@ -423,7 +590,7 @@ style="display:none">
 
 <hr>
 
-<h3>➕ Add Product</h3>
+<h3>➕ Add New Product</h3>
 
 <input class="field"
 id="productName"
@@ -445,7 +612,7 @@ placeholder="Category">
 
 <textarea class="field"
 id="productDescription"
-placeholder="Description">
+placeholder="Product Description">
 </textarea>
 
 <input class="field"
@@ -455,7 +622,9 @@ accept="image/*">
 
 <button class="primary"
 onclick="addProduct()">
-Add Product
+
+ADD PRODUCT
+
 </button>
 
 
@@ -464,9 +633,20 @@ Add Product
 <div id="adminProducts"></div>
 
 
-<button class="danger"
+<hr>
+
+<h3>⭐ Reviews</h3>
+
+<div id="adminReviews"></div>
+
+
+<br>
+
+<button class="red"
 onclick="logout()">
-Logout
+
+LOGOUT
+
 </button>
 
 </div>
@@ -477,15 +657,15 @@ Logout
 
 <script>
 
-const PRODUCTS_KEY="arslan_products";
+const PRODUCT_KEY="arslan_products";
 const CART_KEY="arslan_cart";
-const ORDERS_KEY="arslan_orders";
-const REVIEWS_KEY="arslan_reviews";
+const ORDER_KEY="arslan_orders";
+const REVIEW_KEY="arslan_reviews";
 
 
-let products=JSON.parse(
-localStorage.getItem(PRODUCTS_KEY)
-)||[
+let products=
+JSON.parse(localStorage.getItem(PRODUCT_KEY)||"null")
+||[
 
 {
 id:1,
@@ -530,17 +710,14 @@ image:"https://images.unsplash.com/photo-1585832770485-e68a5dbfad52?auto=format&
 ];
 
 
-let cart=JSON.parse(
-localStorage.getItem(CART_KEY)||"[]"
-);
+let cart=
+JSON.parse(localStorage.getItem(CART_KEY)||"[]");
 
-let orders=JSON.parse(
-localStorage.getItem(ORDERS_KEY)||"[]"
-);
+let orders=
+JSON.parse(localStorage.getItem(ORDER_KEY)||"[]");
 
-let reviews=JSON.parse(
-localStorage.getItem(REVIEWS_KEY)||"[]"
-);
+let reviews=
+JSON.parse(localStorage.getItem(REVIEW_KEY)||"[]");
 
 let currentCategory="All";
 
@@ -548,7 +725,7 @@ let currentCategory="All";
 function save(){
 
 localStorage.setItem(
-PRODUCTS_KEY,
+PRODUCT_KEY,
 JSON.stringify(products)
 );
 
@@ -558,22 +735,22 @@ JSON.stringify(cart)
 );
 
 localStorage.setItem(
-ORDERS_KEY,
+ORDER_KEY,
 JSON.stringify(orders)
 );
 
 localStorage.setItem(
-REVIEWS_KEY,
+REVIEW_KEY,
 JSON.stringify(reviews)
 );
 
 }
 
 
-function escapeHTML(text){
+function safe(text){
 
 return String(text||"")
-.replace(/[&<>"']/g,function(m){
+.replace(/[&<>"']/g,function(x){
 
 return {
 "&":"&amp;",
@@ -581,8 +758,7 @@ return {
 ">":"&gt;",
 '"':"&quot;",
 "'":"&#039;"
-
-}[m];
+}[x];
 
 });
 
@@ -601,9 +777,9 @@ document.getElementById("categories")
 
 <button class="category
 ${c===currentCategory?"active":""}"
-onclick="setCategory('${escapeHTML(c)}')">
+onclick="setCategory('${safe(c)}')">
 
-${escapeHTML(c)}
+${safe(c)}
 
 </button>
 
@@ -612,16 +788,15 @@ ${escapeHTML(c)}
 }
 
 
-function setCategory(category){
+function setCategory(c){
 
-currentCategory=category;
-
+currentCategory=c;
 renderProducts();
 
 }
 
 
-function productCard(p){
+function card(p){
 
 let discount=p.mrp>p.price
 ?Math.round((1-p.price/p.mrp)*100)
@@ -634,14 +809,14 @@ return `
 ${discount?
 `<span class="badge">${discount}% OFF</span>`:""}
 
-<div class="product-img">
+<div class="productImg">
 
 <img src="${p.image}"
-alt="${escapeHTML(p.name)}">
+alt="${safe(p.name)}">
 
 </div>
 
-<h3>${escapeHTML(p.name)}</h3>
+<h3>${safe(p.name)}</h3>
 
 <div class="price">
 
@@ -658,13 +833,13 @@ ${discount}% OFF
 </div>
 
 <p class="muted">
-${escapeHTML(p.description)}
+${safe(p.description)}
 </p>
 
 <div class="actions">
 
 <button class="add"
-onclick="addToCart(${p.id})">
+onclick="addCart(${p.id})">
 
 ADD TO CART
 
@@ -694,31 +869,31 @@ document.getElementById("search")
 
 let list=products.filter(p=>{
 
-let matchCategory=
+let categoryOK=
 currentCategory==="All"||
 p.category===currentCategory;
 
-let matchSearch=
+let searchOK=
 (p.name+" "+p.category)
 .toLowerCase()
 .includes(search);
 
-return matchCategory&&matchSearch;
+return categoryOK&&searchOK;
 
 });
 
 document.getElementById("productGrid")
-.innerHTML=list.map(productCard).join("")
+.innerHTML=
+list.map(card).join("")
 ||"<p>No products found.</p>";
-
-let offers=products
-.filter(p=>p.mrp>p.price)
-.slice(0,4);
 
 document.getElementById("offers")
 .innerHTML=
-offers.map(productCard).join("")
-||"<p>No offers currently.</p>";
+products
+.filter(p=>p.mrp>p.price)
+.slice(0,4)
+.map(card)
+.join("");
 
 renderCategories();
 
@@ -727,35 +902,31 @@ updateCartCount();
 }
 
 
-function addToCart(id){
+function addCart(id){
 
-let item=cart.find(x=>x.id===id);
+let item=
+cart.find(x=>x.id===id);
 
-if(item){
-
+if(item)
 item.quantity++;
-
-}else{
-
+else
 cart.push({
 id:id,
 quantity:1
 });
 
-}
-
 save();
 
 renderProducts();
 
-alert("Product added to cart!");
+alert("Added to cart!");
 
 }
 
 
 function buyNow(id){
 
-addToCart(id);
+addCart(id);
 
 checkout();
 
@@ -767,9 +938,23 @@ function updateCartCount(){
 document.getElementById("cartCount")
 .textContent=
 cart.reduce(
-(total,item)=>total+item.quantity,
-0
+(a,b)=>a+b.quantity,0
 );
+
+}
+
+
+function cartTotal(){
+
+return cart.reduce((total,item)=>{
+
+let p=
+products.find(x=>x.id===item.id);
+
+return total+
+(p?p.price*item.quantity:0);
+
+},0);
 
 }
 
@@ -780,37 +965,38 @@ let html="";
 
 cart.forEach(item=>{
 
-let p=products.find(
-x=>x.id===item.id
-);
+let p=
+products.find(x=>x.id===item.id);
 
 if(!p)return;
 
 html+=`
 
-<div class="cart-item">
+<div class="cartItem">
 
 <img src="${p.image}">
 
-<div>
+<div style="flex:1">
 
-<b>${escapeHTML(p.name)}</b>
+<b>${safe(p.name)}</b>
 
 <p>
 ₹${p.price} × ${item.quantity}
 </p>
 
-<button
-onclick="changeQuantity(${p.id},-1)">
+<div class="qty">
+
+<button onclick="changeQty(${p.id},-1)">
 −
 </button>
 
 ${item.quantity}
 
-<button
-onclick="changeQuantity(${p.id},1)">
+<button onclick="changeQty(${p.id},1)">
 +
 </button>
+
+</div>
 
 </div>
 
@@ -824,37 +1010,27 @@ document.getElementById("cartItems")
 .innerHTML=
 html||"<p>Your cart is empty.</p>";
 
-let total=cart.reduce((sum,item)=>{
-
-let p=products.find(
-x=>x.id===item.id
-);
-
-return sum+(p?p.price*item.quantity:0);
-
-},0);
+document.getElementById("subtotal")
+.textContent="₹"+cartTotal();
 
 document.getElementById("cartTotal")
-.textContent="Total: ₹"+total;
+.textContent="₹"+cartTotal();
 
 openModal("cartModal");
 
 }
 
 
-function changeQuantity(id,value){
+function changeQty(id,n){
 
-let item=cart.find(x=>x.id===id);
+let item=
+cart.find(x=>x.id===id);
 
-if(item){
+if(item)
+item.quantity+=n;
 
-item.quantity+=value;
-
-}
-
-cart=cart.filter(
-x=>x.quantity>0
-);
+cart=
+cart.filter(x=>x.quantity>0);
 
 save();
 
@@ -869,13 +1045,53 @@ function checkout(){
 
 if(!cart.length){
 
-alert("Your cart is empty.");
+alert("Cart is empty!");
 
 return;
 
 }
 
 closeModal("cartModal");
+
+let bill="";
+
+cart.forEach(item=>{
+
+let p=
+products.find(x=>x.id===item.id);
+
+bill+=`
+
+<div class="billRow">
+
+<span>
+${safe(p.name)} × ${item.quantity}
+</span>
+
+<b>
+₹${p.price*item.quantity}
+</b>
+
+</div>
+
+`;
+
+});
+
+bill+=`
+
+<div class="billTotal">
+
+<span>Total</span>
+
+<span>₹${cartTotal()}</span>
+
+</div>
+
+`;
+
+document.getElementById("checkoutBill")
+.innerHTML=bill;
 
 openModal("checkoutModal");
 
@@ -896,40 +1112,45 @@ let address=
 document.getElementById("customerAddress")
 .value.trim();
 
+
 if(!name||!phone||!address){
 
-alert("Please fill all details.");
+alert("Please fill Name, Mobile and Address.");
 
 return;
 
 }
 
 
-let items=cart.map(item=>{
+let items=
+cart.map(item=>{
 
-let p=products.find(
-x=>x.id===item.id
-);
+let p=
+products.find(x=>x.id===item.id);
 
 return {
+
 name:p.name,
+
 price:p.price,
+
 quantity:item.quantity
+
 };
 
 });
 
 
-let total=items.reduce(
-(sum,item)=>
-sum+item.price*item.quantity,
+let total=
+items.reduce(
+(a,x)=>a+x.price*x.quantity,
 0
 );
 
 
 let order={
 
-id:"ORD"+Date.now(),
+id:"AGS-"+Date.now(),
 
 customer:name,
 
@@ -959,12 +1180,23 @@ save();
 renderProducts();
 
 document.getElementById("orderMessage")
-.innerHTML=
-'<b style="color:green">✅ COD Order Placed Successfully!</b>';
+.innerHTML=`
 
-alert(
-"Order placed successfully. Order ID: "+order.id
-);
+<p class="green">
+
+✅ Order placed successfully!
+
+<br>
+
+Order ID: ${order.id}
+
+<br>
+
+Payment: Cash on Delivery
+
+</p>
+
+`;
 
 }
 
@@ -999,7 +1231,7 @@ return;
 }
 
 
-function saveReview(image=""){
+function finish(image=""){
 
 reviews.unshift({
 
@@ -1030,17 +1262,15 @@ if(file){
 
 let reader=new FileReader();
 
-reader.onload=function(){
-
-saveReview(reader.result);
-
+reader.onload=()=>{
+finish(reader.result);
 };
 
 reader.readAsDataURL(file);
 
 }else{
 
-saveReview();
+finish();
 
 }
 
@@ -1049,21 +1279,23 @@ saveReview();
 
 function renderReviews(){
 
-let html=reviews.map(r=>`
+let html=
+reviews.map(r=>`
 
 <div class="review">
 
-<b>${escapeHTML(r.name)}</b>
+<b>${safe(r.name)}</b>
 
 <span style="color:#f59e0b">
 ${"★".repeat(r.rating)}
 </span>
 
-<p>${escapeHTML(r.text)}</p>
+<p>
+${safe(r.text)}
+</p>
 
 ${r.image?
-`<img src="${r.image}"
-style="width:100px;height:80px;object-fit:cover">`
+`<img src="${r.image}">`
 :""}
 
 <br>
@@ -1090,18 +1322,16 @@ openModal("adminModal");
 
 function loginAdmin(){
 
-let username=
-document.getElementById("adminUser")
-.value;
+let u=
+document.getElementById("adminUser").value;
 
-let password=
-document.getElementById("adminPass")
-.value;
+let p=
+document.getElementById("adminPass").value;
 
 
 if(
-username==="admin" &&
-password==="MM@12345"
+u==="admin" &&
+p==="MM@12345"
 ){
 
 document.getElementById("adminLogin")
@@ -1127,6 +1357,8 @@ renderOrders();
 
 renderAdminProducts();
 
+renderAdminReviews();
+
 }
 
 
@@ -1134,32 +1366,33 @@ function renderOrders(){
 
 let html="";
 
-orders.forEach((order,index)=>{
+orders.forEach((o,i)=>{
 
 html+=`
 
 <div class="order">
 
-<b>${order.id}</b>
+<h3>${o.id}</h3>
 
 <p>
-👤 ${escapeHTML(order.customer)}
+👤 <b>${safe(o.customer)}</b>
 <br>
-📞 ${escapeHTML(order.phone)}
+📞 ${safe(o.phone)}
 <br>
-📍 ${escapeHTML(order.address)}
+📍 ${safe(o.address)}
 </p>
 
 <p>
 
-${order.items.map(item=>
-escapeHTML(item.name)+
-" × "+item.quantity
+${o.items.map(x=>
+safe(x.name)+
+" × "+x.quantity+
+" = ₹"+(x.price*x.quantity)
 ).join("<br>")}
 
 </p>
 
-<b>Total: ₹${order.total}</b>
+<h3>Total: ₹${o.total}</h3>
 
 <p>
 💵 Cash on Delivery
@@ -1168,42 +1401,38 @@ escapeHTML(item.name)+
 <p>
 Status:
 <span class="status">
-${order.status}
+${o.status}
 </span>
 </p>
 
-<select
-class="field"
-onchange="changeOrderStatus(${index},this.value)">
+<select class="field"
+onchange="changeStatus(${i},this.value)">
 
-<option ${order.status==="Pending"?"selected":""}>
+<option ${o.status==="Pending"?"selected":""}>
 Pending
 </option>
 
-<option ${order.status==="Accepted"?"selected":""}>
+<option ${o.status==="Accepted"?"selected":""}>
 Accepted
 </option>
 
-<option ${order.status==="Out for Delivery"?"selected":""}>
+<option ${o.status==="Out for Delivery"?"selected":""}>
 Out for Delivery
 </option>
 
-<option ${order.status==="Delivered"?"selected":""}>
+<option ${o.status==="Delivered"?"selected":""}>
 Delivered
 </option>
 
-<option ${order.status==="Rejected"?"selected":""}>
+<option ${o.status==="Rejected"?"selected":""}>
 Rejected
 </option>
 
 </select>
 
-<button
-class="danger"
-onclick="deleteOrder(${index})">
-
+<button class="red"
+onclick="deleteOrder(${i})">
 Delete
-
 </button>
 
 </div>
@@ -1219,9 +1448,9 @@ html||"<p>No orders yet.</p>";
 }
 
 
-function changeOrderStatus(index,status){
+function changeStatus(i,status){
 
-orders[index].status=status;
+orders[i].status=status;
 
 save();
 
@@ -1230,11 +1459,11 @@ renderOrders();
 }
 
 
-function deleteOrder(index){
+function deleteOrder(i){
 
 if(confirm("Delete this order?")){
 
-orders.splice(index,1);
+orders.splice(i,1);
 
 save();
 
@@ -1285,7 +1514,7 @@ if(
 !file
 ){
 
-alert("Please fill all product details.");
+alert("Please fill every field and select photo.");
 
 return;
 
@@ -1320,7 +1549,7 @@ renderProducts();
 
 renderAdminProducts();
 
-alert("Product added successfully!");
+alert("Product added!");
 
 };
 
@@ -1333,18 +1562,18 @@ function renderAdminProducts(){
 
 document.getElementById("adminProducts")
 .innerHTML=
-products.map((p,index)=>`
+products.map((p,i)=>`
 
 <div class="order">
 
-<b>${escapeHTML(p.name)}</b>
+<b>${safe(p.name)}</b>
 
 — ₹${p.price}
 
 <button
-class="danger"
+class="red"
 style="float:right"
-onclick="deleteProduct(${index})">
+onclick="deleteProduct(${i})">
 
 Delete
 
@@ -1357,11 +1586,11 @@ Delete
 }
 
 
-function deleteProduct(index){
+function deleteProduct(i){
 
 if(confirm("Delete product?")){
 
-products.splice(index,1);
+products.splice(i,1);
 
 save();
 
@@ -1370,6 +1599,48 @@ renderProducts();
 renderAdminProducts();
 
 }
+
+}
+
+
+function renderAdminReviews(){
+
+document.getElementById("adminReviews")
+.innerHTML=
+reviews.map((r,i)=>`
+
+<div class="order">
+
+<b>${safe(r.name)}</b>
+
+— ${r.rating}★
+
+<p>${safe(r.text)}</p>
+
+<button class="red"
+onclick="deleteReview(${i})">
+
+Delete Review
+
+</button>
+
+</div>
+
+`).join("")
+||"<p>No reviews.</p>";
+
+}
+
+
+function deleteReview(i){
+
+reviews.splice(i,1);
+
+save();
+
+renderReviews();
+
+renderAdminReviews();
 
 }
 
