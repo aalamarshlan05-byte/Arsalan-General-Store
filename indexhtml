@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arshlan Ke Bhanja</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;color:#172033}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+header{height:70px;background:#fff;display:flex;align-items:center;justify-content:space-between;padding:0 6%;position:sticky;top:0;z-index:50;box-shadow:0 2px 15px #0001}
+.logo{font-size:20px;font-weight:900;color:#2563eb}
+nav button{border:0;background:none;margin-left:16px;font-weight:bold;color:#475569}
+nav button:hover{color:#2563eb}
+.hero{padding:70px 6%;background:linear-gradient(135deg,#eaf3ff,#fff);display:grid;grid-template-columns:1fr 320px;gap:50px;align-items:center}
+.badge{color:#2563eb;font-size:12px;font-weight:900;letter-spacing:1px}
+.hero h1{font-size:58px;line-height:1.05;margin:15px 0}
+.hero h1 span{color:#2563eb}
+.hero p{color:#64748b;font-size:18px;line-height:1.7;max-width:650px}
+.btn{border:0;border-radius:10px;padding:12px 18px;font-weight:800;margin-top:18px}
+.blue{background:#2563eb;color:#fff}
+.light{background:#e7efff;color:#2563eb}
+.profile{background:white;border-radius:25px;padding:25px;text-align:center;box-shadow:0 15px 45px #0001}
+.profile img{width:135px;height:135px;border-radius:50%;object-fit:cover;border:6px solid #e6efff}
+.profile h3{margin:10px 0 3px}
+.profile p{color:#64748b}
+.progress{height:10px;background:#e5e7eb;border-radius:20px;margin:18px 0 6px;overflow:hidden}
+.progress div{height:100%;width:0;background:#2563eb;transition:.4s}
+section{padding:60px 6%}
+.title{text-align:center;margin-bottom:32px}
+.title h2{font-size:35px}
+.title p{color:#64748b;margin-top:7px}
+.subjects{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.subject{background:white;padding:23px;border-radius:18px;border:1px solid #e5e7eb;box-shadow:0 8px 25px #00000009}
+.subject:hover{transform:translateY(-3px)}
+.subject .icon{font-size:36px}
+.subject h3{margin:10px 0 5px}
+.subject p{font-size:14px;color:#64748b;min-height:43px}
+.subject button,.lesson button{border:0;background:#2563eb;color:#fff;padding:9px 13px;border-radius:8px;margin-top:14px;font-weight:bold}
+.lesson-area{background:#edf5ff}
+.lesson-box{max-width:950px;margin:auto;background:#fff;border-radius:20px;padding:28px}
+.lesson-item{padding:16px;border:1px solid #e2e8f0;border-radius:10px;margin:9px 0;display:flex;justify-content:space-between;gap:15px;align-items:center}
+.lesson-item small{color:#64748b}
+.quiz{max-width:800px;margin:auto;background:#fff;border-radius:20px;padding:30px;text-align:center;box-shadow:0 8px 30px #0001}
+.quiz h3{font-size:27px;margin:20px 0}
+.answers button{padding:12px 25px;background:#fff;border:1px solid #cbd5e1;border-radius:9px;margin:5px;font-weight:bold}
+.answers button:hover{border-color:#2563eb;color:#2563eb}
+#quizMsg{font-weight:bold;margin:15px}
+footer{background:#172033;color:white;text-align:center;padding:30px}
+.modal{display:none;position:fixed;inset:0;background:#0009;z-index:100;align-items:center;justify-content:center;padding:20px}
+.modalbox{background:#fff;width:100%;max-width:430px;border-radius:20px;padding:28px}
+.modalbox input,.modalbox textarea,.modalbox select{width:100%;padding:11px;margin:7px 0;border:1px solid #cbd5e1;border-radius:8px}
+.close{float:right;border:0;background:none;font-size:25px}
+.error{color:#dc2626;margin-top:10px}
+#admin{display:none;background:#f1f5f9;min-height:100vh;padding:35px 6%}
+.adminhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.admin-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.admin-card{background:#fff;padding:22px;border-radius:15px}
+.admin-card input,.admin-card textarea,.admin-card select{width:100%;padding:10px;margin:6px 0;border:1px solid #cbd5e1;border-radius:8px}
+.admin-card button{border:0;background:#2563eb;color:white;padding:10px 14px;border-radius:8px;margin-top:8px}
+.red{background:#dc2626!important}
+.notice{background:#fff7ed;border:1px solid #fed7aa;color:#9a3412;padding:12px;border-radius:10px;margin-bottom:20px}
+@media(max-width:850px){
+.hero{grid-template-columns:1fr}
+.subjects{grid-template-columns:repeat(2,1fr)}
+.admin-grid{grid-template-columns:1fr}
+}
+@media(max-width:550px){
+.subjects{grid-template-columns:1fr}
+.hero h1{font-size:42px}
+nav button{font-size:12px;margin-left:5px}
+.lesson-item{flex-direction:column;align-items:flex-start}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">📚 Arshlan Ke Bhanja</div>
+<nav>
+<button onclick="showStudent()">Home</button>
+<button onclick="scrollToId('subjects')">Subjects</button>
+<button onclick="scrollToId('quiz')">Quiz</button>
+<button onclick="openLogin()">Admin</button>
+</nav>
+</header>
+
+<!-- STUDENT WEBSITE -->
+<div id="studentSite">
+
+<section class="hero" id="home">
+
+<div>
+<div class="badge">SMART LEARNING • CLASS 1–5</div>
+
+<h1>
+Learn Everything.<br>
+<span>Grow Every Day.</span>
+</h1>
+
+<p>
+A complete learning website for children with
+school subjects, lessons, practice, quizzes and
+daily progress.
+</p>
+
+<button class="btn blue" onclick="scrollToId('subjects')">
+🚀 Start Learning
+</button>
+</div>
+
+<div class="profile">
+
+<img id="studentPhoto"
+src="https://via.placeholder.com/150?text=Student"
+alt="Student">
+
+<h3 id="studentName">My Student</h3>
+<p id="studentClass">Class 4</p>
+
+<div class="progress">
+<div id="progressBar"></div>
+</div>
+
+<small>
+<span id="progressText">0</span>% completed
+</small>
+
+</div>
+</section>
+
+
+<section id="subjects">
+
+<div class="title">
+<h2>📚 All Subjects</h2>
+<p>Choose any subject to start learning.</p>
+</div>
+
+<div class="subjects" id="subjectGrid"></div>
+
+</section>
+
+
+<section class="lesson-area">
+
+<div class="title">
+<h2 id="selectedTitle">Select a Subject</h2>
+<p id="selectedDescription">
+Your lessons will appear here.
+</p>
+</div>
+
+<div class="lesson-box">
+<div id="lessonList">
+Select a subject above.
+</div>
+</div>
+
+</section>
+
+
+<section id="quiz">
+
+<div class="title">
+<h2>📝 English Quiz</h2>
+<p>Test your English knowledge.</p>
+</div>
+
+<div class="quiz">
+
+<p id="questionNumber"></p>
+
+<h3 id="question"></h3>
+
+<div class="answers" id="answers"></div>
+
+<p id="quizMsg"></p>
+
+<button id="nextBtn"
+class="btn blue"
+style="display:none"
+onclick="nextQuestion()">
+Next Question
+</button>
+
+</div>
+</section>
+
+</div>
+
+
+<footer>
+<h3>📚 Arshlan Ke Bhanja</h3>
+<p>Learn • Practice • Improve • Succeed</p>
+</footer>
+
+
+<!-- ADMIN LOGIN -->
+<div class="modal" id="loginModal">
+
+<div class="modalbox">
+
+<button class="close" onclick="closeLogin()">×</button>
+
+<h2>🔐 Admin Login</h2>
+
+<input id="username" placeholder="Username">
+
+<input id="password" type="password" placeholder="Password">
+
+<button class="btn blue" onclick="login()">Login</button>
+
+<p id="loginError" class="error"></p>
+
+</div>
+</div>
+
+
+<!-- ADMIN PANEL -->
+<div id="admin">
+
+<div class="adminhead">
+<div>
+<h1>⚙️ Arshlan Ke Bhanja Admin</h1>
+<p>Website management panel</p>
+</div>
+
+<button class="btn red" onclick="logout()">Logout</button>
+</div>
+
+<div class="notice">
+<strong>Admin Demo:</strong>
+इस version में data इसी browser में save होता है।
+असली online secure admin/database बाद में जोड़ना होगा।
+</div>
+
+<div class="admin-grid">
+
+<div class="admin-card">
+
+<h3>👦 Student Profile</h3>
+
+<input id="editName" placeholder="Student name">
+
+<input id="editClass" placeholder="Class">
+
+<input id="editPhoto" placeholder="Photo URL">
+
+<button onclick="saveStudent()">Save Profile</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>📚 Add Subject</h3>
+
+<input id="newSubject" placeholder="Subject name">
+
+<input id="newIcon" placeholder="Icon e.g. 📚">
+
+<button onclick="addSubject()">Add Subject</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>📖 Add Lesson</h3>
+
+<select id="lessonSubject"></select>
+
+<input id="lessonTitle" placeholder="Lesson title">
+
+<textarea id="lessonText"
+placeholder="Lesson description"></textarea>
+
+<button onclick="addLesson()">Add Lesson</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>🎯 Website</h3>
+
+<input id="siteTitle"
+value="Arshlan Ke Bhanja"
+placeholder="Website name">
+
+<button onclick="saveSiteName()">Save Website Name</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>📊 Progress</h3>
+
+<p>
+Current Progress:
+<strong id="adminProgress">0%</strong>
+</p>
+
+<button class="red" onclick="resetProgress()">
+Reset Progress
+</button>
+
+</div>
+
+
+<div class="admin-card">
+
+<h3>💾 Backup</h3>
+
+<p>Download your website data.</p>
+
+<button onclick="downloadData()">
+Download Backup
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+/* =========================
+   WEBSITE DATA
+========================= */
+
+let data =
+JSON.parse(localStorage.getItem("AKB_DATA")) || {
+
+student:{
+name:"My Student",
+className:"Class 4",
+photo:"https://via.placeholder.com/150?text=Student"
+},
+
+siteName:"Arshlan Ke Bhanja",
+
+subjects:[
+
+{
+name:"English",
+icon:"🇬🇧",
+description:"Reading, grammar and speaking",
+lessons:[
+["Alphabet & Words","Learn basic English words."],
+["Grammar Basics","Learn is, am and are."],
+["Speaking Practice","Practice daily English sentences."]
+]
+},
+
+{
+name:"Hindi",
+icon:"🇮🇳",
+description:"हिंदी भाषा और व्याकरण",
+lessons:[
+["हिंदी वर्णमाला","स्वर और व्यंजन सीखें।"],
+["शब्द ज्ञान","नए हिंदी शब्द सीखें।"],
+["हिंदी व्याकरण","संज्ञा, सर्वनाम और क्रिया।"]
+]
+},
+
+{
+name:"Mathematics",
+icon:"➗",
+description:"Numbers and problem solving",
+lessons:[
+["Numbers","Numbers and place value."],
+["Addition","Practice addition."],
+["Subtraction","Practice subtraction."],
+["Multiplication","Learn multiplication tables."]
+]
+},
+
+{
+name:"Science / EVS",
+icon:"🔬",
+description:"Science and environment",
+lessons:[
+["Plants","Learn about plants."],
+["Animals","Learn about animals."],
+["Human Body","Learn about our body."],
+["Environment","Protect our environment."]
+]
+},
+
+{
+name:"Social Studies",
+icon:"🌍",
+description:"People, places and society",
+lessons:[
+["Our India","Learn about India."],
+["Maps","Learn basic maps."],
+["Community","People around us."]
+]
+},
+
+{
+name:"Computer",
+icon:"💻",
+description:"Computer basics",
+lessons:[
+["Computer Basics","Parts of a computer."],
+["Keyboard","Learn keyboard keys."],
+["Internet Safety","Learn safe internet habits."]
+]
+},
+
+{
+name:"General Knowledge",
+icon:"🧠",
+description:"Interesting facts",
+lessons:[
+["India GK","Interesting facts about India."],
+["World GK","Interesting world facts."],
+["Animals GK","Amazing animal facts."]
+]
+},
+
+{
+name:"Reasoning",
+icon:"🧩",
+description:"Thinking and problem solving",
+lessons:[
+["Patterns","Find the correct pattern."],
+["Odd One Out","Find the different item."],
+["Number Reasoning","Solve number puzzles."]
+]
+},
+
+{
+name:"Art & Craft",
+icon:"🎨",
+description:"Creativity and imagination",
+lessons:[
+["Drawing","Learn simple drawing."],
+["Colours","Learn colours."],
+["Craft","Make creative crafts."]
+]
+},
+
+{
+name:"Spoken English",
+icon:"🗣️",
+description:"Speak English confidently",
+lessons:[
+["Introduction","Introduce yourself."],
+["Daily Sentences","Useful daily sentences."],
+["Conversation","Simple conversations."]
+]
+}
+
+]
+};
+
+
+let progress =
+Number(localStorage.getItem("AKB_PROGRESS") || 0);
+
+
+/* SAVE */
+
+function saveData(){
+localStorage.setItem(
+"AKB_DATA",
+JSON.stringify(data)
+);
+}
+
+
+/* STUDENT */
+
+function renderStudent(){
+
+document.getElementById("studentName").innerText =
+data.student.name;
+
+document.getElementById("studentClass").innerText =
+data.student.className;
+
+document.getElementById("studentPhoto").src =
+data.student.photo;
+
+document.title =
+data.siteName;
+
+document.querySelector(".logo").innerText =
+"📚 " + data.siteName;
+
+document.querySelector("footer h3").innerText =
+"📚 " + data.siteName;
+
+updateProgress();
+}
+
+
+/* SUBJECTS */
+
+function renderSubjects(){
+
+let grid =
+document.getElementById("subjectGrid");
+
+grid.innerHTML="";
+
+data.subjects.forEach((s,index)=>{
+
+let div =
+document.createElement("div");
+
+div.className="subject";
+
+div.innerHTML=`
+
+<div class="icon">${s.icon}</div>
+
+<h3>${s.name}</h3>
+
+<p>${s.description}</p>
+
+<button onclick="openSubject(${index})">
+Open Subject
+</button>
+
+`;
+
+grid.appendChild(div);
+
+});
+
+updateSubjectSelect();
+}
+
+
+/* OPEN SUBJECT */
+
+function openSubject(index){
+
+let subject=data.subjects[index];
+
+document.getElementById("selectedTitle").innerText =
+subject.icon+" "+subject.name;
+
+document.getElementById("selectedDescription").innerText =
+subject.description;
+
+let list =
+document.getElementById("lessonList");
+
+list.innerHTML="";
+
+if(subject.lessons.length===0){
+
+list.innerHTML="<p>No lessons added yet.</p>";
+return;
+
+}
+
+subject.lessons.forEach((lesson,i)=>{
+
+let item=document.createElement("div");
+
+item.className="lesson-item";
+
+item.innerHTML=`
+
+<div>
+<strong>${i+1}. ${lesson[0]}</strong>
+<br>
+<small>${lesson[1]}</small>
+</div>
+
+<button onclick="completeLesson()">
+Complete
+</button>
+
+`;
+
+list.appendChild(item);
+
+});
+
+document.querySelector(".lesson-area")
+.scrollIntoView({behavior:"smooth"});
+}
+
+
+/* COMPLETE */
+
+function completeLesson(){
+
+progress += 5;
+
+if(progress>100)
+progress=100;
+
+localStorage.setItem(
+"AKB_PROGRESS",
+progress
+);
+
+updateProgress();
+
+alert("🎉 Great Job! Lesson completed.");
+
+}
+
+
+function updateProgress(){
+
+document.getElementById("progressBar")
+.style.width=progress+"%";
+
+document.getElementById("progressText")
+.innerText=progress;
+
+let adminProgress=
+document.getElementById("adminProgress");
+
+if(adminProgress)
+adminProgress.innerText=progress+"%";
+}
+
+
+/* NAVIGATION */
+
+function scrollToId(id){
+
+document.getElementById(id)
+.scrollIntoView({behavior:"smooth"});
+
+}
+
+function showStudent(){
+
+document.getElementById("studentSite")
+.style.display="block";
+
+document.getElementById("admin")
+.style.display="none";
+
+scrollToId("home");
+
+}
+
+
+/* ADMIN LOGIN */
+
+function openLogin(){
+
+document.getElementById("loginModal")
+.style.display="flex";
+
+}
+
+function closeLogin(){
+
+document.getElementById("loginModal")
+.style.display="none";
+
+}
+
+function login(){
+
+let user=
+document.getElementById("username").value;
+
+let pass=
+document.getElementById("password").value;
+
+
+/* DEMO ADMIN */
+
+if(user==="admin" && pass==="1234"){
+
+closeLogin();
+
+document.getElementById("studentSite")
+.style.display="none";
+
+document.getElementById("admin")
+.style.display="block";
+
+loadAdmin();
+
+}else{
+
+document.getElementById("loginError")
+.innerText=
+"Username या Password गलत है.";
+
+}
+
+}
+
+
+function logout(){
+
+document.getElementById("admin")
+.style.display="none";
+
+document.getElementById("studentSite")
+.style.display="block";
+
+}
+
+
+/* ADMIN LOAD */
+
+function loadAdmin(){
+
+document.getElementById("editName").value =
+data.student.name;
+
+document.getElementById("editClass").value =
+data.student.className;
+
+document.getElementById("editPhoto").value =
+data.student.photo;
+
+document.getElementById("siteTitle").value =
+data.siteName;
+
+document.getElementById("adminProgress").innerText =
+progress+"%";
+
+}
+
+
+/* SAVE STUDENT */
+
+function saveStudent(){
+
+data.student.name =
+document.getElementById("editName").value;
+
+data.student.className =
+document.getElementById("editClass").value;
+
+data.student.photo =
+document.getElementById("editPhoto").value;
+
+saveData();
+
+renderStudent();
+
+alert("✅ Student profile updated!");
+
+}
+
+
+/* ADD SUBJECT */
+
+function addSubject(){
+
+let name =
+document.getElementById("newSubject").value;
+
+let icon =
+document.getElementById("newIcon").value || "📚";
+
+if(!name){
+
+alert("Subject name डालें.");
+return;
+
+}
+
+data.subjects.push({
+
+name:name,
+icon:icon,
+description:"New subject",
+lessons:[]
+
+});
+
+saveData();
+renderSubjects();
+
+document.getElementById("newSubject").value="";
+document.getElementById("newIcon").value="";
+
+alert("✅ Subject added!");
+
+}
+
+
+/* SUBJECT SELECT */
+
+function updateSubjectSelect(){
+
+let select =
+document.getElementById("lessonSubject");
+
+if(!select)return;
+
+select.innerHTML="";
+
+data.subjects.forEach((s,i)=>{
+
+let option =
+document.createElement("option");
+
+option.value=i;
+option.textContent=s.name;
+
+select.appendChild(option);
+
+});
+
+}
+
+
+/* ADD LESSON */
+
+function addLesson(){
+
+let index =
+Number(document.getElementById(
+"lessonSubject").value);
+
+let title =
+document.getElementById(
+"lessonTitle").value;
+
+let text =
+document.getElementById(
+"lessonText").value;
+
+if(!title){
+
+alert("Lesson title डालें.");
+return;
+
+}
+
+data.subjects[index].lessons.push(
+[title,text]
+);
+
+saveData();
+
+document.getElementById("lessonTitle").value="";
+document.getElementById("lessonText").value="";
+
+alert("✅ Lesson added!");
+
+}
+
+
+/* WEBSITE NAME */
+
+function saveSiteName(){
+
+let name =
+document.getElementById("siteTitle").value;
+
+if(!name)return;
+
+data.siteName=name;
+
+saveData();
+renderStudent();
+
+alert("✅ Website name updated!");
+
+}
+
+
+/* RESET */
+
+function resetProgress(){
+
+if(confirm("Progress reset करें?")){
+
+progress=0;
+
+localStorage.setItem(
+"AKB_PROGRESS",
+0
+);
+
+updateProgress();
+
+}
+
+}
+
+
+/* BACKUP */
+
+function downloadData(){
+
+let blob =
+new Blob(
+[JSON.stringify(data,null,2)],
+{type:"application/json"}
+);
+
+let url =
+URL.createObjectURL(blob);
+
+let a =
+document.createElement("a");
+
+a.href=url;
+a.download="arshlan-ke-bhanja-backup.json";
+a.click();
+
+}
+
+
+/* =========================
+   QUIZ
+========================= */
+
+const questions=[
+
+["She ___ happy.",["is","am","are"],"is"],
+
+["I ___ a student.",["is","am","are"],"am"],
+
+["They ___ friends.",["is","am","are"],"are"],
+
+["He ___ my brother.",["is","am","are"],"is"],
+
+["We ___ ready.",["is","am","are"],"are"]
+
+];
+
+let qIndex=0;
+let score=0;
+
+
+function loadQuiz(){
+
+let q=questions[qIndex];
+
+document.getElementById("questionNumber")
+.innerText=
+"Question "+(qIndex+1)+" of "+questions.length;
+
+document.getElementById("question")
+.innerText=q[0];
+
+document.getElementById("quizMsg")
+.innerText="";
+
+document.getElementById("nextBtn")
+.style.display="none";
+
+let box =
+document.getElementById("answers");
+
+box.innerHTML="";
+
+q[1].forEach(answer=>{
+
+let btn =
+document.createElement("button");
+
+btn.innerText=answer;
+
+btn.onclick=()=>checkAnswer(answer);
+
+box.appendChild(btn);
+
+});
+
+}
+
+
+function checkAnswer(answer){
+
+let correct=questions[qIndex][2];
+
+if(answer===correct){
+
+score++;
+
+document.getElementById("quizMsg")
+.innerText="✅ Correct! Excellent!";
+
+}else{
+
+document.getElementById("quizMsg")
+.innerText=
+"❌ Correct answer: "+correct;
+
+}
+
+document.getElementById("nextBtn")
+.style.display="inline-block";
+
+}
+
+
+function nextQuestion(){
+
+qIndex++;
+
+if(qIndex<questions.length){
+
+loadQuiz();
+
+}else{
+
+document.getElementById("question")
+.innerText="🎉 Quiz Completed!";
+
+document.getElementById("answers")
+.innerHTML=
+"<h2>Your Score: "+score+"/"+questions.length+"</h2>";
+
+document.getElementById("nextBtn")
+.style.display="none";
+
+}
+
+}
+
+
+/* START WEBSITE */
+
+renderStudent();
+renderSubjects();
+loadQuiz();
+
+</script>
+
+</body>
+</html>
