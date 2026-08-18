@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arslan General Store</title>
+
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f1f3f6;color:#172337}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:0}
+
+header{
+background:#2874f0;color:white;position:sticky;top:0;z-index:50
+}
+.nav{
+max-width:1200px;margin:auto;padding:10px 14px;
+display:flex;align-items:center;gap:14px
+}
+.logo{font-size:21px;font-weight:bold;white-space:nowrap}
+.logo small{display:block;font-size:9px;color:#ffe500}
+
+.search{
+flex:1;background:white;display:flex;border-radius:3px;overflow:hidden
+}
+.search input{
+width:100%;padding:12px;border:0;outline:0
+}
+.search button{background:white;color:#2874f0;padding:0 15px}
+
+.cart-btn{
+background:none;color:white;font-weight:bold
+}
+
+.hero{
+max-width:1200px;margin:12px auto;padding:35px 25px;
+background:linear-gradient(120deg,#172337,#2874f0);
+color:white;border-radius:6px;
+display:flex;justify-content:space-between;align-items:center
+}
+.hero h1{font-size:38px;margin:0 0 10px}
+.hero p{line-height:1.5}
+.hero button{
+background:#ff9f00;padding:12px 22px;
+font-weight:bold;border-radius:4px
+}
+
+.container{max-width:1200px;margin:auto;padding:0 10px}
+
+.categories{
+display:flex;gap:8px;overflow:auto;background:white;
+padding:12px;margin-bottom:12px
+}
+.category{
+padding:10px 16px;background:#f5f7fa;
+border-radius:20px;white-space:nowrap
+}
+.category.active{background:#2874f0;color:white}
+
+.section{
+background:white;padding:18px;margin-bottom:14px
+}
+.section h2{margin:0 0 16px}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:14px
+}
+
+.product{
+border:1px solid #ddd;padding:10px;
+position:relative;background:white
+}
+.product:hover{box-shadow:0 4px 15px #0002}
+
+.product-img{
+height:180px;background:#f7f7f7;
+display:flex;align-items:center;justify-content:center
+}
+.product-img img{
+width:100%;height:100%;object-fit:contain
+}
+
+.product h3{font-size:15px}
+.price{font-size:19px;font-weight:bold}
+.mrp{
+text-decoration:line-through;
+color:#777;font-size:12px;margin-left:5px
+}
+.discount{color:#168b3b;font-size:12px;font-weight:bold}
+
+.badge{
+position:absolute;top:8px;left:8px;
+background:#e53935;color:white;
+padding:4px 7px;font-size:10px
+}
+
+.actions{
+display:flex;gap:7px;margin-top:10px
+}
+.actions button{
+flex:1;padding:9px;font-weight:bold;border-radius:4px
+}
+.add{background:#fb641b;color:white}
+.buy{background:#ff9f00}
+
+.muted{color:#667085;font-size:13px}
+
+.modal{
+display:none;position:fixed;inset:0;
+background:#0008;z-index:100;
+align-items:center;justify-content:center;
+padding:12px
+}
+
+.box{
+background:white;width:100%;max-width:650px;
+max-height:92vh;overflow:auto;
+padding:20px;border-radius:8px
+}
+
+.close{float:right;padding:7px 10px}
+.field{
+width:100%;padding:11px;margin:6px 0;
+border:1px solid #ccd4df;border-radius:4px
+}
+
+.primary{
+background:#2874f0;color:white;
+padding:11px 18px;border-radius:4px;
+font-weight:bold
+}
+
+.danger{
+background:#d93025;color:white;
+padding:8px;border-radius:4px
+}
+
+.cart-item{
+display:flex;gap:12px;
+padding:12px 0;border-bottom:1px solid #ddd
+}
+.cart-item img{
+width:70px;height:70px;object-fit:contain
+}
+
+.order{
+border:1px solid #ddd;
+padding:12px;margin:10px 0;
+border-radius:5px
+}
+.status{color:#2874f0;font-weight:bold}
+
+.review{
+padding:12px 0;border-bottom:1px solid #ddd
+}
+
+footer{
+background:#172337;color:white;
+text-align:center;padding:30px;margin-top:20px
+}
+
+@media(max-width:850px){
+.grid{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:600px){
+.nav{flex-wrap:wrap}
+.search{order:3;flex-basis:100%}
+.grid{grid-template-columns:repeat(2,1fr)}
+.product-img{height:145px}
+.hero h1{font-size:28px}
+.hero{margin:8px}
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="nav">
+
+<div class="logo">
+ARSLAN<br>
+<small>GENERAL STORE</small>
+</div>
+
+<div class="search">
+<input id="search"
+placeholder="Search products..."
+oninput="renderProducts()">
+<button>🔍</button>
+</div>
+
+<button class="cart-btn" onclick="openCart()">
+🛒 Cart (<span id="cartCount">0</span>)
+</button>
+
+</div>
+</header>
+
+
+<div class="container">
+
+<section class="hero">
+
+<div>
+<h1>Arslan General Store</h1>
+<p>
+Daily groceries, household products,
+snacks and essential items.
+</p>
+
+<button onclick="document.getElementById('products').scrollIntoView()">
+SHOP NOW
+</button>
+</div>
+
+<div style="font-size:70px">🛍️</div>
+
+</section>
+
+
+<div class="categories" id="categories"></div>
+
+
+<section class="section">
+
+<h2>🔥 Best Offers</h2>
+
+<div class="grid" id="offers"></div>
+
+</section>
+
+
+<section class="section" id="products">
+
+<h2>🛒 All Products</h2>
+
+<div class="grid" id="productGrid"></div>
+
+</section>
+
+
+<section class="section">
+
+<h2>⭐ Customer Reviews</h2>
+
+<div id="reviews"></div>
+
+<button class="primary"
+onclick="openModal('reviewModal')">
+Write Review
+</button>
+
+</section>
+
+</div>
+
+
+<footer>
+
+<b>Arslan General Store</b>
+
+<p>💵 Cash on Delivery Available</p>
+
+<button class="primary"
+onclick="openAdmin()">
+🔐 Admin Panel
+</button>
+
+</footer>
+
+
+<!-- CART -->
+
+<div class="modal" id="cartModal">
+
+<div class="box">
+
+<button class="close"
+onclick="closeModal('cartModal')">✕</button>
+
+<h2>🛒 Your Cart</h2>
+
+<div id="cartItems"></div>
+
+<h3 id="cartTotal"></h3>
+
+<button class="primary"
+onclick="checkout()">
+Continue with Cash on Delivery
+</button>
+
+</div>
+</div>
+
+
+<!-- CHECKOUT -->
+
+<div class="modal" id="checkoutModal">
+
+<div class="box">
+
+<button class="close"
+onclick="closeModal('checkoutModal')">✕</button>
+
+<h2>📦 Cash on Delivery</h2>
+
+<input class="field"
+id="customerName"
+placeholder="Full Name">
+
+<input class="field"
+id="customerPhone"
+placeholder="Mobile Number">
+
+<textarea class="field"
+id="customerAddress"
+placeholder="Complete Delivery Address">
+</textarea>
+
+<p><b>Payment Method: Cash on Delivery</b></p>
+
+<button class="primary"
+onclick="placeOrder()">
+Place COD Order
+</button>
+
+<p id="orderMessage"></p>
+
+</div>
+</div>
+
+
+<!-- REVIEW -->
+
+<div class="modal" id="reviewModal">
+
+<div class="box">
+
+<button class="close"
+onclick="closeModal('reviewModal')">✕</button>
+
+<h2>⭐ Customer Review</h2>
+
+<input class="field"
+id="reviewName"
+placeholder="Your Name">
+
+<select class="field" id="reviewRating">
+
+<option value="5">★★★★★ 5</option>
+<option value="4">★★★★ 4</option>
+<option value="3">★★★ 3</option>
+<option value="2">★★ 2</option>
+<option value="1">★ 1</option>
+
+</select>
+
+<textarea class="field"
+id="reviewText"
+placeholder="Write your review">
+</textarea>
+
+<input class="field"
+id="reviewPhoto"
+type="file"
+accept="image/*">
+
+<button class="primary"
+onclick="submitReview()">
+Submit Review
+</button>
+
+</div>
+</div>
+
+
+<!-- ADMIN -->
+
+<div class="modal" id="adminModal">
+
+<div class="box">
+
+<button class="close"
+onclick="closeModal('adminModal')">✕</button>
+
+
+<div id="adminLogin">
+
+<h2>🔐 Admin Login</h2>
+
+<input class="field"
+id="adminUser"
+placeholder="Username">
+
+<input class="field"
+id="adminPass"
+type="password"
+placeholder="Password">
+
+<button class="primary"
+onclick="loginAdmin()">
+Login
+</button>
+
+</div>
+
+
+<div id="dashboard"
+style="display:none">
+
+<h2>⚙️ Admin Dashboard</h2>
+
+<h3>📦 Customer Orders</h3>
+
+<div id="orders"></div>
+
+
+<hr>
+
+<h3>➕ Add Product</h3>
+
+<input class="field"
+id="productName"
+placeholder="Product Name">
+
+<input class="field"
+id="productPrice"
+type="number"
+placeholder="Sale Price">
+
+<input class="field"
+id="productMRP"
+type="number"
+placeholder="MRP">
+
+<input class="field"
+id="productCategory"
+placeholder="Category">
+
+<textarea class="field"
+id="productDescription"
+placeholder="Description">
+</textarea>
+
+<input class="field"
+id="productImage"
+type="file"
+accept="image/*">
+
+<button class="primary"
+onclick="addProduct()">
+Add Product
+</button>
+
+
+<h3>🛍️ Manage Products</h3>
+
+<div id="adminProducts"></div>
+
+
+<button class="danger"
+onclick="logout()">
+Logout
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+
+const PRODUCTS_KEY="arslan_products";
+const CART_KEY="arslan_cart";
+const ORDERS_KEY="arslan_orders";
+const REVIEWS_KEY="arslan_reviews";
+
+
+let products=JSON.parse(
+localStorage.getItem(PRODUCTS_KEY)
+)||[
+
+{
+id:1,
+name:"Daily Grocery Pack",
+price:199,
+mrp:249,
+category:"Grocery",
+description:"Daily-use grocery essentials.",
+image:"https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=700&q=80"
+},
+
+{
+id:2,
+name:"Household Essentials",
+price:299,
+mrp:399,
+category:"Household",
+description:"Useful household products.",
+image:"https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=700&q=80"
+},
+
+{
+id:3,
+name:"Snacks Combo",
+price:149,
+mrp:199,
+category:"Snacks",
+description:"Popular snacks combo.",
+image:"https://images.unsplash.com/photo-1621939514649-280e2aa6e20f?auto=format&fit=crop&w=700&q=80"
+},
+
+{
+id:4,
+name:"Cleaning Essentials",
+price:179,
+mrp:229,
+category:"Cleaning",
+description:"Home cleaning essentials.",
+image:"https://images.unsplash.com/photo-1585832770485-e68a5dbfad52?auto=format&fit=crop&w=700&q=80"
+}
+
+];
+
+
+let cart=JSON.parse(
+localStorage.getItem(CART_KEY)||"[]"
+);
+
+let orders=JSON.parse(
+localStorage.getItem(ORDERS_KEY)||"[]"
+);
+
+let reviews=JSON.parse(
+localStorage.getItem(REVIEWS_KEY)||"[]"
+);
+
+let currentCategory="All";
+
+
+function save(){
+
+localStorage.setItem(
+PRODUCTS_KEY,
+JSON.stringify(products)
+);
+
+localStorage.setItem(
+CART_KEY,
+JSON.stringify(cart)
+);
+
+localStorage.setItem(
+ORDERS_KEY,
+JSON.stringify(orders)
+);
+
+localStorage.setItem(
+REVIEWS_KEY,
+JSON.stringify(reviews)
+);
+
+}
+
+
+function escapeHTML(text){
+
+return String(text||"")
+.replace(/[&<>"']/g,function(m){
+
+return {
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
+
+}[m];
+
+});
+
+}
+
+
+function renderCategories(){
+
+let categories=[
+"All",
+...new Set(products.map(p=>p.category))
+];
+
+document.getElementById("categories")
+.innerHTML=categories.map(c=>`
+
+<button class="category
+${c===currentCategory?"active":""}"
+onclick="setCategory('${escapeHTML(c)}')">
+
+${escapeHTML(c)}
+
+</button>
+
+`).join("");
+
+}
+
+
+function setCategory(category){
+
+currentCategory=category;
+
+renderProducts();
+
+}
+
+
+function productCard(p){
+
+let discount=p.mrp>p.price
+?Math.round((1-p.price/p.mrp)*100)
+:0;
+
+return `
+
+<article class="product">
+
+${discount?
+`<span class="badge">${discount}% OFF</span>`:""}
+
+<div class="product-img">
+
+<img src="${p.image}"
+alt="${escapeHTML(p.name)}">
+
+</div>
+
+<h3>${escapeHTML(p.name)}</h3>
+
+<div class="price">
+
+₹${p.price}
+
+<span class="mrp">
+₹${p.mrp}
+</span>
+
+</div>
+
+<div class="discount">
+${discount}% OFF
+</div>
+
+<p class="muted">
+${escapeHTML(p.description)}
+</p>
+
+<div class="actions">
+
+<button class="add"
+onclick="addToCart(${p.id})">
+
+ADD TO CART
+
+</button>
+
+<button class="buy"
+onclick="buyNow(${p.id})">
+
+BUY NOW
+
+</button>
+
+</div>
+
+</article>
+
+`;
+
+}
+
+
+function renderProducts(){
+
+let search=
+document.getElementById("search")
+.value.toLowerCase();
+
+let list=products.filter(p=>{
+
+let matchCategory=
+currentCategory==="All"||
+p.category===currentCategory;
+
+let matchSearch=
+(p.name+" "+p.category)
+.toLowerCase()
+.includes(search);
+
+return matchCategory&&matchSearch;
+
+});
+
+document.getElementById("productGrid")
+.innerHTML=list.map(productCard).join("")
+||"<p>No products found.</p>";
+
+let offers=products
+.filter(p=>p.mrp>p.price)
+.slice(0,4);
+
+document.getElementById("offers")
+.innerHTML=
+offers.map(productCard).join("")
+||"<p>No offers currently.</p>";
+
+renderCategories();
+
+updateCartCount();
+
+}
+
+
+function addToCart(id){
+
+let item=cart.find(x=>x.id===id);
+
+if(item){
+
+item.quantity++;
+
+}else{
+
+cart.push({
+id:id,
+quantity:1
+});
+
+}
+
+save();
+
+renderProducts();
+
+alert("Product added to cart!");
+
+}
+
+
+function buyNow(id){
+
+addToCart(id);
+
+checkout();
+
+}
+
+
+function updateCartCount(){
+
+document.getElementById("cartCount")
+.textContent=
+cart.reduce(
+(total,item)=>total+item.quantity,
+0
+);
+
+}
+
+
+function openCart(){
+
+let html="";
+
+cart.forEach(item=>{
+
+let p=products.find(
+x=>x.id===item.id
+);
+
+if(!p)return;
+
+html+=`
+
+<div class="cart-item">
+
+<img src="${p.image}">
+
+<div>
+
+<b>${escapeHTML(p.name)}</b>
+
+<p>
+₹${p.price} × ${item.quantity}
+</p>
+
+<button
+onclick="changeQuantity(${p.id},-1)">
+−
+</button>
+
+${item.quantity}
+
+<button
+onclick="changeQuantity(${p.id},1)">
++
+</button>
+
+</div>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("cartItems")
+.innerHTML=
+html||"<p>Your cart is empty.</p>";
+
+let total=cart.reduce((sum,item)=>{
+
+let p=products.find(
+x=>x.id===item.id
+);
+
+return sum+(p?p.price*item.quantity:0);
+
+},0);
+
+document.getElementById("cartTotal")
+.textContent="Total: ₹"+total;
+
+openModal("cartModal");
+
+}
+
+
+function changeQuantity(id,value){
+
+let item=cart.find(x=>x.id===id);
+
+if(item){
+
+item.quantity+=value;
+
+}
+
+cart=cart.filter(
+x=>x.quantity>0
+);
+
+save();
+
+openCart();
+
+updateCartCount();
+
+}
+
+
+function checkout(){
+
+if(!cart.length){
+
+alert("Your cart is empty.");
+
+return;
+
+}
+
+closeModal("cartModal");
+
+openModal("checkoutModal");
+
+}
+
+
+function placeOrder(){
+
+let name=
+document.getElementById("customerName")
+.value.trim();
+
+let phone=
+document.getElementById("customerPhone")
+.value.trim();
+
+let address=
+document.getElementById("customerAddress")
+.value.trim();
+
+if(!name||!phone||!address){
+
+alert("Please fill all details.");
+
+return;
+
+}
+
+
+let items=cart.map(item=>{
+
+let p=products.find(
+x=>x.id===item.id
+);
+
+return {
+name:p.name,
+price:p.price,
+quantity:item.quantity
+};
+
+});
+
+
+let total=items.reduce(
+(sum,item)=>
+sum+item.price*item.quantity,
+0
+);
+
+
+let order={
+
+id:"ORD"+Date.now(),
+
+customer:name,
+
+phone:phone,
+
+address:address,
+
+items:items,
+
+total:total,
+
+payment:"Cash on Delivery",
+
+status:"Pending",
+
+date:new Date().toLocaleString()
+
+};
+
+
+orders.unshift(order);
+
+cart=[];
+
+save();
+
+renderProducts();
+
+document.getElementById("orderMessage")
+.innerHTML=
+'<b style="color:green">✅ COD Order Placed Successfully!</b>';
+
+alert(
+"Order placed successfully. Order ID: "+order.id
+);
+
+}
+
+
+function submitReview(){
+
+let name=
+document.getElementById("reviewName")
+.value.trim();
+
+let text=
+document.getElementById("reviewText")
+.value.trim();
+
+let rating=
+Number(
+document.getElementById("reviewRating")
+.value
+);
+
+let file=
+document.getElementById("reviewPhoto")
+.files[0];
+
+
+if(!name||!text){
+
+alert("Name and review required.");
+
+return;
+
+}
+
+
+function saveReview(image=""){
+
+reviews.unshift({
+
+name:name,
+
+text:text,
+
+rating:rating,
+
+image:image,
+
+date:new Date().toLocaleDateString()
+
+});
+
+save();
+
+renderReviews();
+
+closeModal("reviewModal");
+
+alert("Review submitted!");
+
+}
+
+
+if(file){
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+saveReview(reader.result);
+
+};
+
+reader.readAsDataURL(file);
+
+}else{
+
+saveReview();
+
+}
+
+}
+
+
+function renderReviews(){
+
+let html=reviews.map(r=>`
+
+<div class="review">
+
+<b>${escapeHTML(r.name)}</b>
+
+<span style="color:#f59e0b">
+${"★".repeat(r.rating)}
+</span>
+
+<p>${escapeHTML(r.text)}</p>
+
+${r.image?
+`<img src="${r.image}"
+style="width:100px;height:80px;object-fit:cover">`
+:""}
+
+<br>
+
+<small>${r.date}</small>
+
+</div>
+
+`).join("");
+
+document.getElementById("reviews")
+.innerHTML=
+html||"<p class='muted'>No reviews yet.</p>";
+
+}
+
+
+function openAdmin(){
+
+openModal("adminModal");
+
+}
+
+
+function loginAdmin(){
+
+let username=
+document.getElementById("adminUser")
+.value;
+
+let password=
+document.getElementById("adminPass")
+.value;
+
+
+if(
+username==="admin" &&
+password==="MM@12345"
+){
+
+document.getElementById("adminLogin")
+.style.display="none";
+
+document.getElementById("dashboard")
+.style.display="block";
+
+renderAdmin();
+
+}else{
+
+alert("Wrong Username or Password");
+
+}
+
+}
+
+
+function renderAdmin(){
+
+renderOrders();
+
+renderAdminProducts();
+
+}
+
+
+function renderOrders(){
+
+let html="";
+
+orders.forEach((order,index)=>{
+
+html+=`
+
+<div class="order">
+
+<b>${order.id}</b>
+
+<p>
+👤 ${escapeHTML(order.customer)}
+<br>
+📞 ${escapeHTML(order.phone)}
+<br>
+📍 ${escapeHTML(order.address)}
+</p>
+
+<p>
+
+${order.items.map(item=>
+escapeHTML(item.name)+
+" × "+item.quantity
+).join("<br>")}
+
+</p>
+
+<b>Total: ₹${order.total}</b>
+
+<p>
+💵 Cash on Delivery
+</p>
+
+<p>
+Status:
+<span class="status">
+${order.status}
+</span>
+</p>
+
+<select
+class="field"
+onchange="changeOrderStatus(${index},this.value)">
+
+<option ${order.status==="Pending"?"selected":""}>
+Pending
+</option>
+
+<option ${order.status==="Accepted"?"selected":""}>
+Accepted
+</option>
+
+<option ${order.status==="Out for Delivery"?"selected":""}>
+Out for Delivery
+</option>
+
+<option ${order.status==="Delivered"?"selected":""}>
+Delivered
+</option>
+
+<option ${order.status==="Rejected"?"selected":""}>
+Rejected
+</option>
+
+</select>
+
+<button
+class="danger"
+onclick="deleteOrder(${index})">
+
+Delete
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.getElementById("orders")
+.innerHTML=
+html||"<p>No orders yet.</p>";
+
+}
+
+
+function changeOrderStatus(index,status){
+
+orders[index].status=status;
+
+save();
+
+renderOrders();
+
+}
+
+
+function deleteOrder(index){
+
+if(confirm("Delete this order?")){
+
+orders.splice(index,1);
+
+save();
+
+renderOrders();
+
+}
+
+}
+
+
+function addProduct(){
+
+let name=
+document.getElementById("productName")
+.value.trim();
+
+let price=
+Number(
+document.getElementById("productPrice")
+.value
+);
+
+let mrp=
+Number(
+document.getElementById("productMRP")
+.value
+);
+
+let category=
+document.getElementById("productCategory")
+.value.trim();
+
+let description=
+document.getElementById("productDescription")
+.value.trim();
+
+let file=
+document.getElementById("productImage")
+.files[0];
+
+
+if(
+!name||
+!price||
+!mrp||
+!category||
+!description||
+!file
+){
+
+alert("Please fill all product details.");
+
+return;
+
+}
+
+
+let reader=new FileReader();
+
+reader.onload=function(){
+
+products.push({
+
+id:Date.now(),
+
+name:name,
+
+price:price,
+
+mrp:mrp,
+
+category:category,
+
+description:description,
+
+image:reader.result
+
+});
+
+save();
+
+renderProducts();
+
+renderAdminProducts();
+
+alert("Product added successfully!");
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+function renderAdminProducts(){
+
+document.getElementById("adminProducts")
+.innerHTML=
+products.map((p,index)=>`
+
+<div class="order">
+
+<b>${escapeHTML(p.name)}</b>
+
+— ₹${p.price}
+
+<button
+class="danger"
+style="float:right"
+onclick="deleteProduct(${index})">
+
+Delete
+
+</button>
+
+</div>
+
+`).join("");
+
+}
+
+
+function deleteProduct(index){
+
+if(confirm("Delete product?")){
+
+products.splice(index,1);
+
+save();
+
+renderProducts();
+
+renderAdminProducts();
+
+}
+
+}
+
+
+function logout(){
+
+document.getElementById("dashboard")
+.style.display="none";
+
+document.getElementById("adminLogin")
+.style.display="block";
+
+}
+
+
+function openModal(id){
+
+document.getElementById(id)
+.style.display="flex";
+
+}
+
+
+function closeModal(id){
+
+document.getElementById(id)
+.style.display="none";
+
+}
+
+
+renderProducts();
+
+renderReviews();
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
